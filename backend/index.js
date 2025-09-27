@@ -1,11 +1,9 @@
-// index.js
 const express = require('express');
-const app = express();
+const cors = require('cors');
 const accionesRouter = require('./routes/acciones');
-const cors = require('cors'); // 🔹 importa cors
 
-// 🔹 Permitir todas las conexiones desde cualquier origen
-app.use(cors());
+const app = express();
+app.use(cors()); // 🔹 Esto permite que Angular acceda al backend
 
 app.use('/api/acciones', accionesRouter);
 

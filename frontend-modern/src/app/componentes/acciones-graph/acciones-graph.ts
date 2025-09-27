@@ -7,26 +7,26 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
   standalone: true,
   imports: [CommonModule, HttpClientModule],
   templateUrl: './acciones-graph.html',
-  styleUrl: './acciones-graph.scss'
+  styleUrls: ['./acciones-graph.scss']
 })
 export class AccionesGraphComponent {
-  precios: Record<string, number> = {}; // 🔹 objeto con precios
-  acciones: string[] = []; // 🔹 lista de símbolos
+  precios: Record<string, number> = {};
 
   constructor(private http: HttpClient) {
-    this.cargarDatos();
+    this.actualizarPrecios();
   }
 
-  cargarDatos() {
-    this.http.get<Record<string, number>>('http://localhost:3000/api/acciones/precios')
+  actualizarPrecios() {
+    this.http.get<any>('http://localhost:3000/api/acciones/precios')
       .subscribe({
-        next: (data) => {
+        next: data => {
           this.precios = data;
-          this.acciones = Object.keys(data);
         },
-        error: (err) => {
-          console.error('Error cargando precios:', err);
-        }
+        error: err => console.error('Error al obtener precios', err)
       });
+  }
+
+  getAcciones() {
+    return Object.keys(this.precios);
   }
 }
