@@ -1,13 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CryptoGraph } from './componentes/crypto-graph/crypto-graph';
+import { AccionesGraphComponent } from './componentes/acciones-graph/acciones-graph';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CryptoGraph],
+  standalone: true,
+  imports: [RouterOutlet, AccionesGraphComponent], // 🔹 Aquí lo importas
   templateUrl: './app.html',
-  styleUrl: './app.scss',
-  standalone: true
+  styleUrl: './app.scss'
 })
 export class App {
   protected readonly title = signal('frontend');

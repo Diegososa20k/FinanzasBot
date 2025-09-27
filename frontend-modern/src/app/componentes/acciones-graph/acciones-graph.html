@@ -1,0 +1,12 @@
+<h2>Precios de Acciones</h2>
+
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Acción</th>
+    <th>Precio</th>
+  </tr>
+  <tr *ngFor="let accion of acciones">
+    <td>{{ accion }}</td>
+    <td>{{ precios[accion] }}</td>
+  </tr>
+</table>
