@@ -2,7 +2,9 @@
   "dependencies": {
     "chart.js": "^4.5.0",
     "cors": "^2.8.5",
-    "ng2-charts": "^6.0.1"
+    "ml-regression-simple-linear": "^3.0.1",
+    "ng2-charts": "^6.0.1",
+    "yahoo-finance2": "^2.13.3"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

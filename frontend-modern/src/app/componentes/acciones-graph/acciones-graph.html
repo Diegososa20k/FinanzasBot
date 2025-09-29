@@ -12,3 +12,71 @@
 </table>
 
 <button (click)="actualizarPrecios()">Actualizar precios</button>
+
+
+<h2>Histórico de precios</h2>
+
+<label>Acción:
+  <select [(ngModel)]="accionSeleccionada">
+    <option *ngFor="let accion of getAcciones()" [value]="accion">{{ accion }}</option>
+  </select>
+</label>
+
+<label>Días:
+  <select [(ngModel)]="diasSeleccionados">
+    <option [value]="7">7 días</option>
+    <option [value]="15">15 días</option>
+    <option [value]="30">30 días</option>
+    <option [value]="90">90 días</option>
+    <option [value]="365">365 días</option>
+  </select>
+</label>
+
+<button (click)="obtenerHistorico()">Mostrar histórico</button>
+
+<table *ngIf="historico[accionSeleccionada]">
+  <tr>
+    <th>Fecha</th>
+    <th>Cierre (USD)</th>
+  </tr>
+  <tr *ngFor="let item of historico[accionSeleccionada]">
+    <td>{{ item.fecha }}</td>
+    <td>{{ item.cierre }}</td>
+  </tr>
+</table>
+
+<div *ngIf="historico[accionSeleccionada]">
+  <h3>Indicadores</h3>
+  <p>Promedio móvil (SMA): {{ sma | number:'1.2-2' }}</p>
+  <p>Cambio porcentual: {{ cambioPorcentual | number:'1.2-2' }}%</p>
+  <p>Tendencia: {{ tendencia }}</p>
+</div>
+
+
+<div *ngIf="historico[accionSeleccionada]">
+  <h3>Indicadores</h3>
+  <p>SMA: {{ sma | number:'1.2-2' }}</p>
+  <p>EMA: {{ ema | number:'1.2-2' }}</p>
+  <p>RSI: {{ rsi | number:'1.2-2' }}</p>
+  <p>Cambio porcentual: {{ cambioPorcentual | number:'1.2-2' }}%</p>
+  <p>Tendencia: {{ tendencia }}</p>
+</div>
+
+
+<button (click)="obtenerPredicciones()">Predecir (1, 7, 15, 30 días)</button>
+
+<div *ngIf="predicciones">
+  <h3>Predicciones</h3>
+  <p>1 día: {{ predicciones['1d'] | number:'1.2-2' }} USD</p>
+  <p>7 días: {{ predicciones['7d'] | number:'1.2-2' }} USD</p>
+  <p>15 días: {{ predicciones['15d'] | number:'1.2-2' }} USD</p>
+  <p>30 días: {{ predicciones['30d'] | number:'1.2-2' }} USD</p>
+</div>
+
+<p>SMA (7 días): {{ smaCorto | number:'1.2-2' }}</p>
+<p>SMA (30 días): {{ smaLargo | number:'1.2-2' }}</p>
+<p>Señal de cruce: {{ cruce }}</p>
+
+
+<p>RSI: {{ rsi | number:'1.2-2' }} ({{ tendencia.split('|')[1] }})</p>
+
